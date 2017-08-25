@@ -3,20 +3,29 @@ import iopc
 
 pkg_path = ""
 output_dir = ""
+arch_alt = ""
 
 def set_global(args):
     global pkg_path 
     global output_dir
+    global arch_alt
     pkg_path = args["pkg_path"]
     output_dir = args["output_path"]
+    arch_alt = ops.getEnv("ARCH_ALT")
 
 def MAIN_ENV(args):
     set_global(args)
     print ops.getEnv("ARCH_ALT")
     print ops.getEnv("DO_DEBOOTSTRAP")
+    if arch_alt == "armel":
+        ops.exportEnv(ops.setEnv("ARCH", "arm"))
+    elif arch_alt == "x86_64":
+        ops.exportEnv(ops.setEnv("ARCH", "amd64"))
+    elif arch_alt == "any":
+        ops.exportEnv(ops.setEnv("ARCH", "amd64"))
+    else:
+        sys.exit(1)
 
-    ops.exportEnv(ops.setEnv("ARCH", "arm"))
-    #ops.exportEnv(ops.setEnv("ARCH_ALT", "armhf"))
     ops.exportEnv(ops.setEnv("SDKSTAGE", output_dir + "/sdkstage"))
     ops.exportEnv(ops.setEnv("ARCH_ROOTFS", output_dir + "/rootfs"))
     ops.exportEnv(ops.setEnv("PACKAGES_DIR", output_dir + "/packages_dir"))
