@@ -20,7 +20,8 @@ def MAIN_ENV(args):
     if arch_alt == "armel":
         ops.exportEnv(ops.setEnv("ARCH", "arm"))
     elif arch_alt == "x86_64":
-        ops.exportEnv(ops.setEnv("ARCH", "amd64"))
+        #ops.exportEnv(ops.setEnv("ARCH", "amd64"))
+        ops.exportEnv(ops.setEnv("ARCH", "x86_64"))
     elif arch_alt == "any":
         ops.exportEnv(ops.setEnv("ARCH", "amd64"))
     else:
