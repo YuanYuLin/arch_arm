@@ -32,6 +32,7 @@ def MAIN_ENV(args):
     ops.exportEnv(ops.setEnv("PACKAGES_DIR", output_dir + "/packages_dir"))
     ops.exportEnv(ops.setEnv("BASE_ROOTFS_DIR", output_dir))
     ops.exportEnv(ops.setEnv("OUTPUT_ROOTFS_DIR", output_dir))
+
     return False
 
 def MAIN_EXTRACT(args):
